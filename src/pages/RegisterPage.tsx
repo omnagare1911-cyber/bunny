@@ -8,10 +8,12 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    contactNumber: '',
     password: '',
     confirmPassword: '',
     college: '',
-    studentId: ''
+    studentId: '',
+    userType: 'student' // 'student' or 'parent'
   });
 
   const colleges = [
@@ -53,6 +55,52 @@ const RegisterPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                I am registering as:
+              </label>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div
+                  className={`border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 ${
+                    formData.userType === 'student'
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-300 hover:border-gray-400'
+                  }`}
+                  onClick={() => setFormData({ ...formData, userType: 'student' })}
+                >
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="userType"
+                      value="student"
+                      checked={formData.userType === 'student'}
+                      onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                      className="h-4 w-4 text-blue-600"
+                    />
+                    <span className="font-medium text-gray-900">Student</span>
+                  </div>
+                </div>
+                <div
+                  className={`border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 ${
+                    formData.userType === 'parent'
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-300 hover:border-gray-400'
+                  }`}
+                  onClick={() => setFormData({ ...formData, userType: 'parent' })}
+                >
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="userType"
+                      value="parent"
+                      checked={formData.userType === 'parent'}
+                      onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                      className="h-4 w-4 text-blue-600"
+                    />
+                    <span className="font-medium text-gray-900">Parent</span>
+                  </div>
+                </div>
+              </div>
+
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
                 Full Name
               </label>
@@ -69,6 +117,27 @@ const RegisterPage = () => {
                   onChange={handleChange}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="Enter your full name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="contactNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                Contact Number
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="contactNumber"
+                  name="contactNumber"
+                  type="tel"
+                  required
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="+91 98765 43210"
                 />
               </div>
             </div>
@@ -122,7 +191,7 @@ const RegisterPage = () => {
 
             <div>
               <label htmlFor="studentId" className="block text-sm font-medium text-gray-700 mb-2">
-                Student ID <span className="text-gray-400">(Optional)</span>
+                {formData.userType === 'student' ? 'Student ID' : 'Child\'s Student ID'} <span className="text-gray-400">(Optional)</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -135,7 +204,7 @@ const RegisterPage = () => {
                   value={formData.studentId}
                   onChange={handleChange}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="Enter your student ID"
+                  placeholder={formData.userType === 'student' ? "Enter your student ID" : "Enter your child's student ID"}
                 />
               </div>
             </div>

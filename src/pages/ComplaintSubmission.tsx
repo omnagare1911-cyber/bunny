@@ -4,8 +4,20 @@ import { Upload, ChevronRight, ChevronLeft, CheckCircle } from 'lucide-react';
 const ComplaintSubmission = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    // Personal Information
+    complainerType: 'student', // 'student' or 'parent'
+    fullName: '',
+    contactNumber: '',
+    email: '',
+    // College Information
     college: '',
+    collegeWebsite: '',
+    city: '',
+    collegeAddress: '',
+    // Teacher Information
     teacher: '',
+    teacherSubject: '',
+    // Complaint Details
     categories: [],
     complaint: '',
     evidence: null
@@ -18,15 +30,22 @@ const ComplaintSubmission = () => {
     'JNU',
     'MIT Bangalore',
     'IIT Delhi',
-    'Jawaharlal Nehru University'
+    'Jawaharlal Nehru University',
+    'Other (Please specify below)'
   ];
 
-  const teachers = [
-    'Prof. Sarah Johnson - Mathematics',
-    'Dr. Michael Chen - Physics',
-    'Ms. Emily Davis - English Literature',
-    'Prof. Robert Wilson - Computer Science',
-    'Dr. Lisa Anderson - Chemistry'
+  const subjects = [
+    'Mathematics',
+    'Physics',
+    'Chemistry',
+    'Biology',
+    'English Literature',
+    'Computer Science',
+    'History',
+    'Geography',
+    'Economics',
+    'Political Science',
+    'Other'
   ];
 
   const categories = [
@@ -53,7 +72,7 @@ const ComplaintSubmission = () => {
   };
 
   const nextStep = () => {
-    if (currentStep < 4) setCurrentStep(currentStep + 1);
+    if (currentStep < 5) setCurrentStep(currentStep + 1);
   };
 
   const prevStep = () => {
@@ -89,7 +108,7 @@ const ComplaintSubmission = () => {
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            {[1, 2, 3, 4].map((step) => (
+            {[1, 2, 3, 4, 5].map((step) => (
               <div
                 key={step}
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
@@ -105,24 +124,131 @@ const ComplaintSubmission = () => {
           <div className="w-full bg-gray-300 rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${(currentStep / 4) * 100}%` }}
+              style={{ width: `${(currentStep / 5) * 100}%` }}
             ></div>
           </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 animate-fade-in">
           <form onSubmit={handleSubmit}>
-            {/* Step 1: College Selection */}
+            {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Select Your College</h2>
-                  <p className="text-gray-600 mb-6">Choose the institution where the teacher works</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Personal Information</h2>
+                  <p className="text-gray-600 mb-6">Tell us about yourself and how we can contact you</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    College Name
+                    I am complaining as a:
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div
+                      className={`border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 ${
+                        formData.complainerType === 'student'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                      onClick={() => setFormData({ ...formData, complainerType: 'student' })}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="complainerType"
+                          value="student"
+                          checked={formData.complainerType === 'student'}
+                          onChange={(e) => setFormData({ ...formData, complainerType: e.target.value })}
+                          className="h-4 w-4 text-blue-600"
+                        />
+                        <div>
+                          <h3 className="font-medium text-gray-900">Student</h3>
+                          <p className="text-sm text-gray-600">I am a student at this college</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 ${
+                        formData.complainerType === 'parent'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                      onClick={() => setFormData({ ...formData, complainerType: 'parent' })}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="complainerType"
+                          value="parent"
+                          checked={formData.complainerType === 'parent'}
+                          onChange={(e) => setFormData({ ...formData, complainerType: e.target.value })}
+                          className="h-4 w-4 text-blue-600"
+                        />
+                        <div>
+                          <h3 className="font-medium text-gray-900">Parent</h3>
+                          <p className="text-sm text-gray-600">I am a parent of a student</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your full name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Contact Number *
+                    </label>
+                    <input
+                      type="tel"
+                      value={formData.contactNumber}
+                      onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="+91 98765 43210"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="your.email@example.com"
+                    required
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: College Information */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">College Information</h2>
+                  <p className="text-gray-600 mb-6">Provide details about the educational institution</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    College Name *
                   </label>
                   <select
                     value={formData.college}
@@ -138,31 +264,101 @@ const ComplaintSubmission = () => {
                     ))}
                   </select>
                 </div>
+
+                {formData.college === 'Other (Please specify below)' && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      College Name (Please specify) *
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter college name"
+                      required
+                    />
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      City *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter city name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      College Website
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.collegeWebsite}
+                      onChange={(e) => setFormData({ ...formData, collegeWebsite: e.target.value })}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="https://college-website.edu"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    College Address *
+                  </label>
+                  <textarea
+                    value={formData.collegeAddress}
+                    onChange={(e) => setFormData({ ...formData, collegeAddress: e.target.value })}
+                    rows={3}
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter complete college address"
+                    required
+                  />
+                </div>
               </div>
             )}
 
-            {/* Step 2: Teacher Selection */}
-            {currentStep === 2 && (
+            {/* Step 3: Teacher Information */}
+            {currentStep === 3 && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Select Teacher</h2>
-                  <p className="text-gray-600 mb-6">Choose the teacher you want to file a complaint about</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Teacher Information</h2>
+                  <p className="text-gray-600 mb-6">Provide details about the teacher you want to file a complaint about</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Teacher Name & Subject
+                    Teacher Name *
                   </label>
-                  <select
+                  <input
+                    type="text"
                     value={formData.teacher}
                     onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter teacher's full name (e.g., Prof. Sarah Johnson)"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Subject Taught *
+                  </label>
+                  <select
+                    value={formData.teacherSubject}
+                    onChange={(e) => setFormData({ ...formData, teacherSubject: e.target.value })}
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   >
-                    <option value="">Select a teacher</option>
-                    {teachers.map((teacher) => (
-                      <option key={teacher} value={teacher}>
-                        {teacher}
+                    <option value="">Select subject</option>
+                    {subjects.map((subject) => (
+                      <option key={subject} value={subject}>
+                        {subject}
                       </option>
                     ))}
                   </select>
@@ -170,8 +366,8 @@ const ComplaintSubmission = () => {
               </div>
             )}
 
-            {/* Step 3: Complaint Categories */}
-            {currentStep === 3 && (
+            {/* Step 4: Complaint Categories */}
+            {currentStep === 4 && (
               <div className="space-y-6">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Complaint Categories</h2>
@@ -207,8 +403,8 @@ const ComplaintSubmission = () => {
               </div>
             )}
 
-            {/* Step 4: Detailed Complaint */}
-            {currentStep === 4 && (
+            {/* Step 5: Detailed Complaint */}
+            {currentStep === 5 && (
               <div className="space-y-6">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Detailed Complaint</h2>
@@ -217,7 +413,7 @@ const ComplaintSubmission = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Complaint Details
+                    Complaint Details *
                   </label>
                   <textarea
                     value={formData.complaint}
@@ -269,7 +465,7 @@ const ComplaintSubmission = () => {
                 <span>Previous</span>
               </button>
 
-              {currentStep < 4 ? (
+              {currentStep < 5 ? (
                 <button
                   type="button"
                   onClick={nextStep}

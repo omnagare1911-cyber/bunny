@@ -12,6 +12,10 @@ import LiveTestPage from './pages/LiveTestPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import WhoWeArePage from './pages/WhoWeArePage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import LiveTestsPage from './pages/LiveTestsPage';
+import TeacherProfilesPage from './pages/TeacherProfilesPage';
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/who-we-are" element={<WhoWeArePage />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
+            <Route path="/live-tests" element={<LiveTestsPage />} />
+            <Route path="/teacher-profiles" element={<TeacherProfilesPage />} />
           </Routes>
         </main>
         <Footer />

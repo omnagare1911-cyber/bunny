@@ -46,11 +46,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">About Us</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">How It Works</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Live Tests</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Teacher Profiles</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Student Dashboard</a></li>
+              <li><a href="/who-we-are" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Who We Are</a></li>
+              <li><a href="/how-it-works" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">How It Works</a></li>
+              <li><a href="/live-tests" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Live Tests</a></li>
+              <li><a href="/teacher-profiles" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Teacher Profiles</a></li>
+              <li><a href="/dashboard" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Student Dashboard</a></li>
             </ul>
           </div>
 

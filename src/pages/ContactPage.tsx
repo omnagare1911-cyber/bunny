@@ -28,20 +28,20 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'support@trb.edu',
+      details: 'teachingreviewboard@gmail.com',
       description: 'Send us an email and we\'ll respond within 24 hours'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+91 98765 43210',
+      details: '+91 9284835950',
       description: 'Available Monday to Friday, 9 AM to 6 PM IST'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: 'New Delhi, India',
-      description: 'Our headquarters in the heart of the capital'
+      details: 'Nashik, India',
+      description: 'Our headquarters in Nashik'
     }
   ];
 
@@ -106,19 +106,24 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {contactInfo.map((info, index) => {
               const IconComponent = info.icon;
+              let href = '#';
+              if (info.title === 'Email Us') href = `mailto:${info.details}`;
+              else if (info.title === 'Call Us') href = `tel:+919284835950`;
+
               return (
-                <div 
+                <a
                   key={index}
-                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-up text-center"
+                  href={href}
+                  className="block bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-up text-center group"
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-800 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-800 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
                     <IconComponent className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{info.title}</h3>
-                  <p className="text-lg font-medium text-amber-600 mb-3">{info.details}</p>
+                  <p className="text-lg font-medium text-amber-600 mb-3 group-hover:text-amber-700 transition-colors duration-200">{info.details}</p>
                   <p className="text-gray-600 text-sm">{info.description}</p>
-                </div>
+                </a>
               );
             })}
           </div>

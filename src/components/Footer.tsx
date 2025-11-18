@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Youtube, Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { BookOpen, Youtube, Mail, Phone, MapPin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -18,26 +18,23 @@ const Footer = () => {
               creating better learning experiences.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="#" 
+              <a
+                href="https://www.youtube.com/@teachingreviewboard"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-red-600 p-3 rounded-full hover:bg-red-700 transition-colors duration-200 group"
                 aria-label="YouTube"
               >
                 <Youtube className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
               </a>
-              <a 
-                href="#" 
-                className="bg-blue-600 p-3 rounded-full hover:bg-blue-700 transition-colors duration-200 group"
-                aria-label="LinkedIn"
+              <a
+                href="https://www.instagram.com/teaching_review_board/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-pink-600 p-3 rounded-full hover:bg-pink-700 transition-colors duration-200 group"
+                aria-label="Instagram"
               >
-                <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
-              </a>
-              <a 
-                href="#" 
-                className="bg-blue-400 p-3 rounded-full hover:bg-blue-500 transition-colors duration-200 group"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
+                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
               </a>
             </div>
           </div>
@@ -69,15 +66,15 @@ const Footer = () => {
               <div className="space-y-2 text-gray-300 text-sm">
                 <div className="flex items-center space-x-2">
                   <Mail className="h-4 w-4" />
-                  <span>support@trb.edu</span>
+                  <a href="mailto:teachingreviewboard@gmail.com" className="hover:text-amber-400 transition-colors duration-200">teachingreviewboard@gmail.com</a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <span>+91 98765 43210</span>
+                  <a href="tel:+919284835950" className="hover:text-amber-400 transition-colors duration-200">+91 9284835950</a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="h-4 w-4" />
-                  <span>New Delhi, India</span>
+                  <span>Nashik, India</span>
                 </div>
               </div>
             </div>

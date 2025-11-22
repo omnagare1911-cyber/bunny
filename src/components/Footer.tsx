@@ -1,5 +1,5 @@
-import React from 'react';
-import { BookOpen, Youtube, Mail, Phone, MapPin, Instagram } from 'lucide-react';
+import { Youtube, Mail, Phone, MapPin, Instagram } from 'lucide-react';
+import { navigation, contact } from '../lib/navigation';
 
 const Footer = () => {
   return (
@@ -8,34 +8,36 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-6">
-              <BookOpen className="h-8 w-8 text-amber-400" />
+            <div className="flex items-center space-x-3 mb-6">
+              <img
+                src="/Educational_Logo__TRB__with_Teaching_Review_Board-removebg-preview.png"
+                alt="TRB Logo"
+                className="h-12 w-12 object-contain"
+              />
               <span className="text-2xl font-bold">TRB</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
-              Teacher Review Board is revolutionizing education by providing a transparent 
-              platform for student feedback and teacher evaluation. Your voice matters in 
+              Teacher Review Board is revolutionizing education by providing a transparent
+              platform for student feedback and teacher evaluation. Your voice matters in
               creating better learning experiences.
             </p>
             <div className="flex space-x-4">
-              <a
-                href="https://www.youtube.com/@teachingreviewboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-red-600 p-3 rounded-full hover:bg-red-700 transition-colors duration-200 group"
-                aria-label="YouTube"
-              >
-                <Youtube className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
-              </a>
-              <a
-                href="https://www.instagram.com/teaching_review_board/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-pink-600 p-3 rounded-full hover:bg-pink-700 transition-colors duration-200 group"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
-              </a>
+              {navigation.social.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-3 rounded-full transition-all duration-200 group ${social.color}`}
+                  aria-label={social.name}
+                >
+                  {social.name === 'YouTube' ? (
+                    <Youtube className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
+                  ) : (
+                    <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
+                  )}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -43,11 +45,13 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="/who-we-are" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Who We Are</a></li>
-              <li><a href="/how-it-works" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">How It Works</a></li>
-              <li><a href="/live-tests" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Live Tests</a></li>
-              <li><a href="/teacher-profiles" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Teacher Profiles</a></li>
-              <li><a href="/dashboard" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Student Dashboard</a></li>
+              {navigation.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-gray-300 hover:text-blue-300 transition-colors duration-200">
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -55,26 +59,33 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Legal</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Terms of Service</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Cookie Policy</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors duration-200">Complaint Guidelines</a></li>
+              {navigation.legal.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-gray-300 hover:text-blue-300 transition-colors duration-200">
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
-            
+
             <div className="mt-8">
               <h4 className="text-md font-semibold mb-4">Contact Info</h4>
               <div className="space-y-2 text-gray-300 text-sm">
                 <div className="flex items-center space-x-2">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:teachingreviewboard@gmail.com" className="hover:text-amber-400 transition-colors duration-200">teachingreviewboard@gmail.com</a>
+                  <a href={`mailto:${contact.email}`} className="hover:text-blue-300 transition-colors duration-200">
+                    {contact.email}
+                  </a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <a href="tel:+919284835950" className="hover:text-amber-400 transition-colors duration-200">+91 9284835950</a>
+                  <a href={`tel:${contact.phone}`} className="hover:text-blue-300 transition-colors duration-200">
+                    {contact.phone}
+                  </a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="h-4 w-4" />
-                  <span>Nashik, India</span>
+                  <span>{contact.location}</span>
                 </div>
               </div>
             </div>

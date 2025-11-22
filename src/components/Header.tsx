@@ -68,12 +68,7 @@ const Header = () => {
                 >
                   How It Works
                 </NavButton>
-                <NavButton
-                  onClick={() => scrollToSection('live-tests')}
-                  isScrolled={isScrolled}
-                >
-                  Live Tests
-                </NavButton>
+                <NavLink to="/live-tests" isScrolled={isScrolled}>Live Tests</NavLink>
               </>
             ) : (
               <>
@@ -125,11 +120,9 @@ const Header = () => {
                   >
                     How It Works
                   </MobileNavButton>
-                  <MobileNavButton
-                    onClick={() => scrollToSection('live-tests')}
-                  >
+                  <MobileNavLink to="/live-tests" onClick={() => setIsMenuOpen(false)}>
                     Live Tests
-                  </MobileNavButton>
+                  </MobileNavLink>
                 </>
               ) : (
                 <>

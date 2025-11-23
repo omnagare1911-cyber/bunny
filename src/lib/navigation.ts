@@ -9,6 +9,7 @@ export const navigation = {
     { name: 'Who We Are', href: '/who-we-are' },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'Live Tests', href: '/live-tests' },
+    { name: 'Placement Support', href: '/placement-support' },
     { name: 'Teacher Profiles', href: '/teacher-profiles' },
     { name: 'Student Dashboard', href: '/dashboard' }
   ],

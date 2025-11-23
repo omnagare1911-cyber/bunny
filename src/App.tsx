@@ -16,6 +16,7 @@ import WhoWeArePage from './pages/WhoWeArePage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import LiveTestsPage from './pages/LiveTestsPage';
 import TeacherProfilesPage from './pages/TeacherProfilesPage';
+import PlacementSupport from './pages/PlacementSupport';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route path="/live-tests" element={<LiveTestsPage />} />
             <Route path="/teacher-profiles" element={<TeacherProfilesPage />} />
+            <Route path="/placement-support" element={<PlacementSupport />} />
           </Routes>
         </main>
         <Footer />
